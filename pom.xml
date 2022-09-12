@@ -14,6 +14,9 @@
         <module>springcloud-eureka-7001</module>
         <module>springcloud-eureka-7002</module>
         <module>springcloud-eureka-7003</module>
+        <module>springcloud-dept-8003</module>
+        <module>springcloud-consumer-dept-feign</module>
+        <module>srpingcloud-provider-dept-hystrix-8005</module>
     </modules>
 
     <properties>
@@ -83,6 +86,16 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-jetty</artifactId>
                 <version>2.7.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-eureka</artifactId>
+                <version>1.4.7.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-feign</artifactId>
+                <version>1.4.7.RELEASE</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

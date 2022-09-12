@@ -19,42 +19,24 @@ public class DeptConsumerController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Autowired
-    LoadBalancerClient loadBalancerClient;
-
 //    private static final String REST_URL_PREFIX = "http://localhost:8001";
-    private static final String REST_URL_PREFIX = "SPRINGCLOUD-PROVIDER-DEPT";
+    private static final String REST_URL_PREFIX = "http://SPRINGCLOUD-PROVIDER-DEPT";
 
     @RequestMapping("comsumer/dept/get/{id}")
     public Dept get(@PathVariable("id") int id)
     {
-        return restTemplate.getForObject(getUrl(REST_URL_PREFIX)+"/dept/get/"+id, Dept.class);
+        return restTemplate.getForObject(REST_URL_PREFIX+"/dept/get/"+id, Dept.class);
     }
 
     @RequestMapping("/comsumer/dept/add")
     public Boolean add(Dept dept){
         System.out.println(dept);
-        return restTemplate.postForObject(getUrl(REST_URL_PREFIX)+"/dept/add", dept, Boolean.class);
+        return restTemplate.postForObject(REST_URL_PREFIX+"/dept/add", dept, Boolean.class);
     }
 
     @RequestMapping("/comsumer/dept/list")
     public List<Dept> list(){
-        return restTemplate.getForObject(getUrl(REST_URL_PREFIX)+"/dept/list", List.class);
-    }
-
-
-    /**
-     * 获取指定url
-     * @param clientApplicationName 指定的服务提供名
-     * @return
-     */
-    private String getUrl(String clientApplicationName) {
-        // 使用loadBalancerClient的choose函数来负载均衡的选出一个eurekaClient的服务实例
-        ServiceInstance serviceInstance = loadBalancerClient.choose(clientApplicationName);
-        // 获取之前eurekaClient /all接口地址
-        String url = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort();
-        System.out.println(url);
-        return url;
+        return restTemplate.getForObject(REST_URL_PREFIX+"/dept/list", List.class);
     }
 
 }
